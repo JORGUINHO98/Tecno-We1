@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/auth.css') }}">
 </head>
 
-<body>
+<body class="auth-page">
     <div class="register-container">
         <h1 class="register-title">Crear Cuenta</h1>
         @if ($errors->any())

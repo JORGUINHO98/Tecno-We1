@@ -2,8 +2,9 @@
 <html>
 <head>
 <title>Mi Primer Laravel</title>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/auth.css') }}">
 <style>
-body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+body { font-family: Arial, sans-serif; margin: 40px; }
 h1 { color: #333; }
 </style>
 </head>

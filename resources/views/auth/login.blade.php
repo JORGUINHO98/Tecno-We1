@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/auth.css') }}">
 </head>
 
-<body>
+<body class="auth-page">
     <div class="login-container">
         <h1 class="login-title">Iniciar Sesión</h1>
         @if ($errors->any())
