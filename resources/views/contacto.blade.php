@@ -2,8 +2,9 @@
 <html>
 <head>
 <title>Contacto - Laravel</title>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/auth.css') }}">
 <style>
-body { font-family: Arial, sans-serif; margin: 40px; background: #f0f8f0; }
+body { font-family: Arial, sans-serif; margin: 40px; }
 h1 { color: #4a7c59; }
 </style>
 </head>
