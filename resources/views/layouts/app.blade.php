@@ -2,6 +2,7 @@
 <html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'TecnoWe1 - Futuristic Tech Platform')</title>
     <!-- Futuristic Fonts -->
@@ -35,25 +36,24 @@
     </script>
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cybercat.css') }}">
+
 </head>
 <body class="font-rajdhani bg-darkbg text-white min-h-screen overflow-x-hidden">
-    <!-- Animated Background -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
-        <!-- Layer 1: Radial Gradient Pulse -->
-        <div class="absolute inset-0 bg-gradient-to-br from-neon-cyan via-neon-blue to-neon-purple animate-pulse-slow opacity-30"></div>
-        <!-- Layer 2: Moving Scanlines -->
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-scanline"></div>
-        <!-- Layer 3: Floating Particles -->
+    <!-- CyberCat Background matching login/register -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]" style="background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/103142169/TuXBifMolTReehzf.png'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black/25 backdrop-blur-sm"></div>
+        <!-- Scan line -->
         <div class="absolute inset-0">
-            <div class="absolute w-2 h-2 bg-neon-glow rounded-full animate-float1 opacity-40"></div>
-            <div class="absolute w-1 h-1 bg-neon-cyan rounded-full animate-float2 opacity-30"></div>
-            <div class="absolute w-3 h-3 bg-neon-purple rounded-full animate-float3 opacity-20"></div>
-            <!-- More particles for density -->
-            <div class="absolute w-1.5 h-1.5 bg-neon-blue rounded-full animate-float4 opacity-35"></div>
-            <div class="absolute w-2 h-2 bg-neon-glow rounded-full animate-float5 opacity-25"></div>
+            <div class="absolute left-0 top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" style="animation-duration: 3s; animation-iteration-count: infinite;"></div>
         </div>
-        <!-- Glitch Effect Overlay -->
-        <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent,neon-cyan,neon-purple,transparent)] animate-glitch opacity-20"></div>
+        <!-- Floating particles -->
+        <div class="absolute inset-0">
+            <div class="absolute w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-ping opacity-40" style="animation-duration: 4s; top: 20%; left: 10%;"></div>
+            <div class="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse opacity-30" style="animation-duration: 6s; top: 60%; right: 20%;"></div>
+            <div class="absolute w-3 h-3 bg-purple-500 rounded-full animate-bounce opacity-20" style="animation-duration: 8s; bottom: 30%; left: 30%;"></div>
+        </div>
     </div>
 
     <!-- Navigation -->
@@ -62,10 +62,10 @@
             <a href="/" class="text-2xl font-orbitron tracking-wider bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent drop-shadow-neon">TECNO WE1</a>
             <div class="flex items-center space-x-4">
 @auth
-                    <a href="/dashboard" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Dashboard</a>
+                    <a href="{{ route('cliente.index') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Clientes</a>
                 @else
-                    <a href="{{ route('login') }}" class="btn-outline-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Login</a>
-                    <a href="{{ route('register') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Register</a>
+<a href="{{ url('/') }}" class="btn-outline-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Login</a>
+                    <a href="{{ route('register') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Crear Cuenta</a>
                 @endauth
             </div>
         </div>
@@ -78,7 +78,7 @@
 
     <!-- Footer -->
     <footer class="relative z-10 backdrop-blur-xl bg-white/5 border-t border-white/20 mt-12 p-8 text-center text-sm opacity-75">
-        <p>&copy; 2024 TecnoWe1. Plataforma Futurista de Tecnología. Ref: 78543210 | Santa Cruz, Bolivia</p>
+        <p>&copy; 2026 TecnoWe1. Plataforma Futurista de Tecnología. Ref: 78543210 | Santa Cruz, Bolivia</p>
     </footer>
 
     <style>

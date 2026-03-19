@@ -19,14 +19,20 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
+        $credentials = $request->only('email', 'password');
+        \Log::info('Login attempt', $credentials);
 
-            return redirect()->intended('/bienvenida');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            \Log::info('Login success', ['user' => Auth::user()->id]);
+
+            return redirect()->intended(route('cliente.index'));
         }
+
+        \Log::info('Login failed for email', ['email' => $request->email]);
 
         throw ValidationException::withMessages([
             'email' => ['Las credenciales proporcionadas no coinciden con nuestros registros.'],
@@ -46,15 +52,22 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
+        \Log::info('Register attempt', $request->all());
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
+        \Log::info('User created', ['id' => $user->id]);
 
-        return redirect('/bienvenida');
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        \Log::info('Register success', ['user' => Auth::id()]);
+
+        return redirect()->intended(route('cliente.index'));
     }
 
     public function logout(Request $request)
@@ -64,6 +77,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/bienvenida');
+        return redirect()->route('login');
     }
 }

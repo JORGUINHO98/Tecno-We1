@@ -8,11 +8,11 @@ class PaginaController extends Controller
 {
     public function inicio()
     {
-        return view('inicio');
+        abort(404);
     }
 
     public function contacto()
     {
-        return view('contacto');
+        abort(404);
     }
 }
