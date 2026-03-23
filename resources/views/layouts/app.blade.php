@@ -63,6 +63,7 @@
             <div class="flex items-center space-x-4">
 @auth
                     <a href="{{ route('cliente.index') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Clientes</a>
+                    <a href="{{ route('producto.index') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Productos</a>
                 @else
 <a href="{{ url('/') }}" class="btn-outline-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Login</a>
                     <a href="{{ route('register') }}" class="btn-neon px-6 py-2 rounded-xl font-medium hover:scale-105 transition-all">Crear Cuenta</a>

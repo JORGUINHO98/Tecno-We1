@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Clientecontroller;
+use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -15,6 +16,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::resource ('cliente', Clientecontroller::class) -> middleware('auth');
+Route::resource('cliente', Clientecontroller::class)->middleware('auth');
+Route::resource('producto', ProductoController::class)->middleware('auth');
 
 ?>
