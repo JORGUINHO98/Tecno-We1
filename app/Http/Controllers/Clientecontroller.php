@@ -10,10 +10,22 @@ class Clientecontroller extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
-        return view('clientes.index', compact('clientes'));
+        $search = $request->get('search');
+        $viewMode = $request->get('view', 'table');
+
+        $query = Cliente::query();
+
+        if ($search) {
+            $query->where('nombre', 'like', "%{$search}%")
+                  ->orWhere('coreo', 'like', "%{$search}%")
+                  ->orWhere('direccion', 'like', "%{$search}%");
+        }
+
+        $clientes = $query->paginate(10)->appends($request->query());
+
+        return view('clientes.index', compact('clientes', 'search', 'viewMode'));
     }
 
     /**
@@ -21,7 +33,8 @@ class Clientecontroller extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+        $cliente = null;
+        return view('clientes.form', compact('cliente'));
     }
 
     /**
@@ -52,7 +65,7 @@ class Clientecontroller extends Controller
     public function edit(string $id)
     {
         $cliente = Cliente::findOrFail($id);
-        return view('clientes.edit', compact('cliente'));
+        return view('clientes.form', compact('cliente'));
     }
 
     /**

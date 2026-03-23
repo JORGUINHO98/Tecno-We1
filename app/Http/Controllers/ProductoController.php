@@ -10,10 +10,36 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Productos::all();
-        return view('productos.index', compact('productos'));
+        $search = $request->get('search');
+        $minPrecio = $request->get('min_precio');
+        $maxPrecio = $request->get('max_precio');
+        $minStock = $request->get('min_stock');
+        $viewMode = $request->get('view', 'table');
+
+        $query = Productos::query();
+
+        if ($search) {
+            $query->where('nombre', 'like', "%{$search}%")
+                  ->orWhere('descripcion', 'like', "%{$search}%");
+        }
+
+        if ($minPrecio !== null) {
+            $query->where('precio', '>=', $minPrecio);
+        }
+
+        if ($maxPrecio !== null) {
+            $query->where('precio', '<=', $maxPrecio);
+        }
+
+        if ($minStock !== null) {
+            $query->where('stock', '>=', $minStock);
+        }
+
+        $productos = $query->paginate(10)->appends($request->query());
+
+        return view('productos.index', compact('productos', 'search', 'minPrecio', 'maxPrecio', 'minStock', 'viewMode'));
     }
 
     /**
@@ -21,7 +47,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        $producto = null;
+        return view('productos.form', compact('producto'));
     }
 
     /**
@@ -53,7 +80,7 @@ class ProductoController extends Controller
     public function edit(string $id)
     {
         $producto = Productos::findOrFail($id);
-        return view('productos.edit', compact('producto'));
+        return view('productos.form', compact('producto'));
     }
 
     /**
